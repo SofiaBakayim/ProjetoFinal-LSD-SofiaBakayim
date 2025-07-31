@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Chronos - Intro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="assets/images/logooos.png">
+    <link rel="shortcut icon" type="image/png" href="assets/images/logooos.png">
+    <link rel="apple-touch-icon" href="assets/images/logooos.png">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            background: #000;
+            overflow: hidden;
+        }
+        .video-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            object-fit: cover;
+            z-index: 1;
+        }
+        .skip-btn {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            z-index: 3;
+            background: rgba(99,1,2,0.8);
+            color: #E2BF5F;
+            border: none;
+            border-radius: 20px;
+            padding: 12px 32px;
+            font-size: 1.2rem;
+            font-family: 'Playfair Display', serif;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .skip-btn:hover {
+            background: rgba(133,90,37,0.9);
+        }
+    </style>
+</head>
+<body>
+    <video id="introVideo" class="video-bg" src="assets/videos/teu-video.mp4" autoplay muted playsinline></video>
+    <button class="skip-btn" id="skipBtn">Saltar</button>
+    <script>
+        const video = document.getElementById('introVideo');
+        const skipBtn = document.getElementById('skipBtn');
+
+        // Começar vídeo a partir do meio
+        video.addEventListener('loadedmetadata', () => {
+            video.currentTime = video.duration / 2;
+        });
+
+        function goToLanding() {
+            window.location.href = 'index.html';
+        }
+
+        video.addEventListener('ended', goToLanding);
+        skipBtn.addEventListener('click', () => {
+            video.pause();
+            goToLanding();
+        });
+    </script>
+</body>
+</html> 

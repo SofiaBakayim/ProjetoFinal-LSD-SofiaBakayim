@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Encontrar CHRONOS - Objeto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        header {
+            background: #630102;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 32px;
+            position: relative;
+            z-index: 10;
+            min-height: 80px;
+        }
+        .logo-img {
+            height: 48px;
+            max-width: 180px;
+            min-width: 120px;
+            margin: 0 auto;
+            display: block;
+            position: relative;
+            z-index: 2;
+        }
+        .nav-btns {
+            display: flex;
+            gap: 18px;
+        }
+        .nav-btn {
+            background: rgba(255, 217, 125, 0.7);
+            color: #630102;
+            border: none;
+            border-radius: 18px;
+            padding: 7px 18px;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 4px 16px rgba(99,1,2,0.13);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            margin: 0;
+            outline: none;
+        }
+        .nav-btn:hover {
+            background: #E2BF5F;
+            color: #630102;
+            transform: scale(1.04);
+        }
+        .menu-btn {
+            display: none;
+            position: absolute;
+            right: 32px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 38px;
+            height: 38px;
+            cursor: pointer;
+            z-index: 10001;
+        }
+        @media (max-width: 900px) {
+            .nav-btns {
+                display: none !important;
+            }
+            .menu-btn {
+                display: block;
+            }
+        }
+        .sidebar {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 260px;
+            height: 100vh;
+            background: rgba(255,255,255,0.18);
+            box-shadow: -4px 0 32px rgba(99,1,2,0.18);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            z-index: 10000;
+            flex-direction: column;
+            align-items: flex-end;
+            padding: 32px 18px 18px 18px;
+            animation: sidebarIn 0.25s;
+            overflow: hidden;
+        }
+        .sidebar.open {
+            display: flex;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            color: #630102;
+            font-size: 2.2rem;
+            position: absolute;
+            left: 18px;
+            top: 18px;
+            cursor: pointer;
+            margin-bottom: 18px;
+            z-index: 1;
+        }
+        .sidebar-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            width: 100%;
+            margin-bottom: 32px;
+        }
+        .sidebar-link {
+            display: block;
+            text-align: center;
+            background: #FFD97D;
+            color: #630102;
+            border-radius: 18px;
+            padding: 10px 0;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(99,1,2,0.13);
+            margin-top: 18px;
+            transition: background 0.2s;
+        }
+        .sidebar-link:hover {
+            background: #E2BF5F;
+        }
+        @keyframes sidebarIn {
+            from { right: -260px; opacity: 0; }
+            to { right: 0; opacity: 1; }
+        }
+        .sidebar-auth {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            margin-top: 18px;
+        }
+        .sidebar-auth-btn {
+            display: block;
+            text-align: center;
+            background: rgba(99,1,2,0.7);
+            color: #fff;
+            border-radius: 18px;
+            padding: 12px 0;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(99,1,2,0.13);
+            transition: background 0.2s;
+        }
+        .sidebar-auth-btn:hover {
+            background: #2d0101;
+        }
+        .sidebar-btns, .sidebar-auth {
+            margin-top: 48px;
+        }
+        body {
+            background: #fff;
+            color: #111;
+            font-family: 'Lato', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .obj-container {
+            max-width: 1100px;
+            margin: 40px auto 0 auto;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 48px;
+            background: #fff;
+            border-radius: 32px;
+            box-shadow: 0 4px 32px rgba(99,1,2,0.10);
+            padding: 40px 32px;
+        }
+        .obj-img {
+            width: 340px;
+            max-width: 100%;
+            border-radius: 18px;
+            box-shadow: 0 2px 12px rgba(99,1,2,0.12);
+            background: #eee;
+            object-fit: cover;
+        }
+        .obj-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .obj-title {
+            font-size: 2.1rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            font-family: 'Lato', Arial, sans-serif;
+        }
+        .obj-desc {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 24px;
+        }
+        .obj-btn {
+            background: #630102;
+            color: #fff;
+            border: none;
+            border-radius: 18px;
+            padding: 10px 28px;
+            font-size: 1rem;
+            font-family: 'Lato', Arial, sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .obj-btn:hover {
+            background: #2d0101;
+        }
+        @media (max-width: 900px) {
+            .obj-container {
+                flex-direction: column;
+                align-items: center;
+                padding: 24px 8px;
+                gap: 24px;
+            }
+            .obj-img {
+                width: 100%;
+                max-width: 320px;
+            }
+        }
+        @media (max-width: 700px) {
+            h2 {
+                padding-left: 16px !important;
+            }
+        }
+        .botoes-saber-mais {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            margin-top: 48px;
+            align-items: center;
+        }
+        .botao-saber-mais {
+            width: 90%;
+            max-width: 1000px;
+            background: #000;
+            color: #fff;
+            border: none;
+            border-radius: 18px;
+            padding: 7px 0;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.08em;
+            font-weight: 400;
+            text-align: center;
+            margin: 0 auto;
+            transition: background 0.2s, color 0.2s, transform 0.2s;
+            cursor: pointer;
+        }
+        .botao-saber-mais:hover {
+            background: #630102;
+            color: #FFD97D;
+            transform: scale(1.03);
+        }
+        .botao-saber-mais {
+            font-size: 1.1rem !important;
+            font-weight: 400 !important;
+            color: #fff !important;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-btns left-nav">
+            <button class="nav-btn" onclick="window.location.href='sobre.html'">Sobre</button>
+            <button class="nav-btn" onclick="window.location.href='home.html#upload-section'">ID</button>
+        </div>
+        <img src="assets/images/logo-chronos.png" alt="Logo Chronos" class="logo-img">
+        <div class="nav-btns right-nav">
+            <button class="nav-btn" onclick="window.location.href='perfil.html'">Perfil</button>
+            <button class="nav-btn">Help</button>
+        </div>
+        <img src="assets/images/logsoso.png" alt="Abrir menu" class="menu-btn" onclick="openSidebar()">
+    </header>
+    <div id="sidebar" class="sidebar">
+        <button class="close-btn" onclick="closeSidebar()">&times;</button>
+        <div class="sidebar-btns">
+            <a href="sobre.html" class="sidebar-link">Sobre</a>
+            <a href="#" class="sidebar-link">ID</a>
+            <a href="#" class="sidebar-link">Perfil</a>
+            <a href="#" class="sidebar-link">Help</a>
+        </div>
+        <div class="sidebar-auth">
+            <a href="login.html" class="sidebar-auth-btn">Login</a>
+            <a href="registar.html" class="sidebar-auth-btn">Registar</a>
+        </div>
+    </div>
+    <main>
+        <h2 style="font-family:'Lato',Arial,sans-serif;font-size:2rem;font-weight:700;color:#630102;text-align:left;margin-top:32px;margin-bottom:18px;padding-left:32px;">Chronos encontrado</h2>
+        <div class="obj-container">
+            <div class="obj-image-container">
+                <img src="assets/images/Placeholder Image.png" alt="Lenço tradicional" class="obj-img">
+                <button class="heart-btn" id="heartBtn" onclick="toggleFavorite()">
+                    <i class="bi bi-heart" id="heartIcon"></i>
+                </button>
+                <div class="save-notification" id="saveNotification">
+                    <i class="bi bi-check-circle"></i>
+                    <span>Guardado em "Guardados"!</span>
+                </div>
+            </div>
+            <div class="obj-info">
+                <div class="obj-title">Lenço tradicional minhoto</div>
+                <div class="obj-desc">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.<br><br>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.
+                </div>
+                <button class="obj-btn" id="saberMaisBtn">Saber Mais...</button>
+                <div id="conteudoExpandido" style="display: none; margin-top: 24px; font-family: 'Lato', Arial, sans-serif;">
+                    <h2 style='font-size:1.4rem; color:#630102;'>Xale Bordado do Século XIX (Região do Minho)</h2>
+                    <img src="assets/images/Group 41.png" alt="Mapa" style="max-width: 400px; width: 100%; margin-bottom: 18px; display: block; margin-left: auto; margin-right: auto;">
+                    <p>
+                        Este xale bordado do século XIX é uma peça emblemática da tradição minhota, destacando-se pelo seu colorido vibrante e motivos florais minuciosamente bordados à mão. Os xailes eram usados sobretudo por mulheres em festas religiosas, romarias e ocasiões especiais, sendo símbolo de estatuto, orgulho e identidade local.
+                    </p>
+                    <h3>História e Origem</h3>
+                    <p>
+                        O xale minhoto surgiu como parte do traje tradicional feminino, especialmente nas zonas rurais do norte de Portugal. Era frequentemente oferecido como presente de casamento ou herança familiar, passando de geração em geração. O bordado manual, feito com fios de seda ou lã, reflete a criatividade e o saber-fazer das artesãs da região.
+                    </p>
+                    <h3>Técnicas de Fabrico</h3>
+                    <p>
+                        Os xailes eram produzidos em teares manuais e posteriormente bordados à mão. Os motivos florais, folhas e arabescos são típicos do Minho, sendo cada peça única. O acabamento com franjas longas era feito com grande cuidado para garantir durabilidade e elegância.
+                    </p>
+                    <h3>Contexto de Uso</h3>
+                    <p>
+                        Para além das festas, o xale era usado em procissões, bailes e até no quotidiano, especialmente em dias frios. Era considerado um elemento de distinção social e, muitas vezes, as raparigas exibiam o seu xale novo nas festas da aldeia.
+                    </p>
+                    <h3>Curiosidades</h3>
+                    <ul>
+                        <li>Cada família podia ter padrões exclusivos, transmitidos como segredo entre gerações.</li>
+                        <li>Alguns xailes antigos têm inscrições ou símbolos bordados com significados afetivos ou religiosos.</li>
+                        <li>O xale era também usado como dote em casamentos.</li>
+                    </ul>
+                    <h3>Valor no Mercado</h3>
+                    <p>
+                        O valor de um xale antigo pode variar entre 150€ e 600€, dependendo do estado de conservação, raridade do padrão, materiais usados e proveniência. Peças com história documentada ou de famílias conhecidas podem atingir valores superiores em leilão.
+                    </p>
+                    <h3>Impacto Social e Cultural</h3>
+                    <p>
+                        O xale minhoto é hoje reconhecido como património cultural imaterial, sendo presença obrigatória em ranchos folclóricos e recriações históricas. O seu fabrico artesanal contribui para a valorização das tradições e para a economia local.
+                    </p>
+                    <h3>Sugestões de Conservação</h3>
+                    <ul>
+                        <li>Guardar em local seco e arejado, protegido da luz solar direta.</li>
+                        <li>Evitar dobrar sempre no mesmo sítio para não fragilizar o tecido.</li>
+                        <li>Limpar apenas com profissionais especializados em têxteis antigos.</li>
+                    </ul>
+                    <h3>Detalhe Adicional</h3>
+                    <p>
+                        Este exemplar encontra-se em excelente estado, mantendo as franjas originais e os bordados intactos. É uma peça rara, ideal para colecionadores, museus ou para quem valoriza a história e a cultura portuguesa.
+                    </p>
+                    <div class="botoes-saber-mais">
+                        <button class="botao-saber-mais">Voltar atrás</button>
+                        <button class="botao-saber-mais">Guardar</button>
+                        <button class="botao-saber-mais">Consultar Profissional</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="novo-footer">
+    <div class="footer-logo-area">
+        <img src="assets/images/zllz.png" alt="Logo Chronos" class="footer-logo">
+    </div>
+            <nav class="footer-nav">
+            <a href="sobre.html">Sobre</a>
+            <a href="home.html#upload-section">Identificar Relíquia</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="perfil.html">Perfil</a>
+            <a href="#">Help</a>
+        </nav>
+    <hr class="footer-divider">
+    <div class="footer-bottom">
+        <span class="footer-copy">© 2025 Chronos. All rights reserved.</span>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookies Settings</a>
+        </div>
+    </div>
+</footer>
+    <style>
+    /* Heart button and save functionality */
+    .obj-image-container {
+        position: relative;
+        display: inline-block;
+    }
+    
+    .heart-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: #630102;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        z-index: 10;
+    }
+    
+    .heart-btn:hover {
+        background: white;
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .heart-btn.favorited {
+        background: #ff4757;
+        color: white;
+        animation: heartBeat 0.6s ease;
+    }
+    
+    .heart-btn.favorited i {
+        animation: heartBeat 0.6s ease;
+    }
+    
+    @keyframes heartBeat {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.3); }
+        100% { transform: scale(1); }
+    }
+    
+    .save-notification {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(76, 175, 80, 0.95);
+        color: white;
+        padding: 15px 25px;
+        border-radius: 25px;
+        font-weight: 700;
+        display: none;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        z-index: 20;
+        animation: slideInUp 0.5s ease;
+    }
+    
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translate(-50%, -30%);
+        }
+        to {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
+    }
+    
+    .save-notification.show {
+        display: flex;
+    }
+    
+    .novo-footer {
+    background: #630102;
+    color: #FFD97D;
+    padding: 0 0 24px 0;
+    text-align: center;
+    font-family: 'Lato', Arial, sans-serif;
+    margin-top: 64px;
+}
+.footer-logo-area {
+    padding-top: 12px;
+}
+.footer-logo {
+    max-width: 110px;
+    margin: 0 auto 12px auto;
+    display: block;
+}
+.footer-nav {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+.footer-nav a {
+    color: #FFD97D;
+    text-decoration: none;
+    font-size: 1rem;
+    font-family: 'Lato', Arial, sans-serif;
+    transition: color 0.2s;
+}
+.footer-nav a:hover {
+    color: #fff;
+}
+.footer-divider {
+    border: none;
+    border-top: 1px solid #FFD97D;
+    margin: 18px 2% 18px 2%;
+}
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 96vw;
+    margin: 0 auto;
+    padding: 0 2%;
+}
+.footer-copy {
+    color: #FFD97D;
+    font-size: 1rem;
+    text-align: left;
+}
+.footer-links {
+    display: flex;
+    gap: 24px;
+}
+.footer-links a {
+    color: #FFD97D;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s;
+}
+.footer-links a:hover {
+    color: #fff;
+}
+@media (max-width: 700px) {
+    .footer-nav {
+        gap: 14px;
+        font-size: 0.95rem;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+    .footer-logo {
+        max-width: 80px;
+    }
+}
+</style>
+    <script>
+    function openSidebar() {
+        document.getElementById('sidebar').classList.add('open');
+    }
+    function closeSidebar() {
+        document.getElementById('sidebar').classList.remove('open');
+    }
+    // Script para mostrar/ocultar o conteúdo expansível
+    document.getElementById('saberMaisBtn').onclick = function() {
+        var conteudo = document.getElementById('conteudoExpandido');
+        if (conteudo.style.display === 'none') {
+            conteudo.style.display = 'block';
+            this.textContent = 'Mostrar menos';
+        } else {
+            conteudo.style.display = 'none';
+            this.textContent = 'Saber Mais...';
+        }
+    };
+    // Redirecionar ao clicar em 'Voltar atrás'
+    document.querySelector('.botao-saber-mais').onclick = function() {
+        window.location.href = 'home.html';
+    };
+    // Sidebar: botão ID leva para home.html#upload-section e fecha sidebar
+    document.addEventListener('DOMContentLoaded', function() {
+        var sidebarLinks = document.querySelectorAll('.sidebar-link');
+        sidebarLinks.forEach(function(link) {
+            if(link.textContent.trim() === 'ID') {
+                link.onclick = function(e) {
+                    e.preventDefault();
+                    closeSidebar();
+                    window.location.href = 'home.html#upload-section';
+                };
+            }
+        });
+    });
+    </script>
+    <script>
+        // Heart button functionality
+        let isFavorited = false;
+        
+        function toggleFavorite() {
+            const heartBtn = document.getElementById('heartBtn');
+            const heartIcon = document.getElementById('heartIcon');
+            const saveNotification = document.getElementById('saveNotification');
+            
+            if (!isFavorited) {
+                // Add to favorites
+                heartBtn.classList.add('favorited');
+                heartIcon.classList.remove('bi-heart');
+                heartIcon.classList.add('bi-heart-fill');
+                isFavorited = true;
+                
+                // Show notification
+                saveNotification.classList.add('show');
+                
+                // Save to localStorage
+                saveToFavorites();
+                
+                // Hide notification after 3 seconds
+                setTimeout(() => {
+                    saveNotification.classList.remove('show');
+                }, 3000);
+                
+            } else {
+                // Remove from favorites
+                heartBtn.classList.remove('favorited');
+                heartIcon.classList.remove('bi-heart-fill');
+                heartIcon.classList.add('bi-heart');
+                isFavorited = false;
+                
+                // Remove from localStorage
+                removeFromFavorites();
+            }
+        }
+        
+        function saveToFavorites() {
+            const favoriteItem = {
+                id: Date.now(),
+                title: 'Lenço tradicional minhoto',
+                image: 'assets/images/Placeholder Image.png',
+                category: 'Relíquias Familiares',
+                date: new Date().toLocaleDateString('pt-PT'),
+                description: 'Xale Bordado do Século XIX (Região do Minho)'
+            };
+            
+            // Get existing favorites
+            let favorites = JSON.parse(localStorage.getItem('chronosFavorites') || '[]');
+            
+            // Check if already exists
+            const exists = favorites.find(item => item.title === favoriteItem.title);
+            if (!exists) {
+                favorites.push(favoriteItem);
+                localStorage.setItem('chronosFavorites', JSON.stringify(favorites));
+            }
+        }
+        
+        function removeFromFavorites() {
+            const title = 'Lenço tradicional minhoto';
+            let favorites = JSON.parse(localStorage.getItem('chronosFavorites') || '[]');
+            
+            favorites = favorites.filter(item => item.title !== title);
+            localStorage.setItem('chronosFavorites', JSON.stringify(favorites));
+        }
+        
+        // Check if item is already favorited on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const title = 'Lenço tradicional minhoto';
+            let favorites = JSON.parse(localStorage.getItem('chronosFavorites') || '[]');
+            
+            const isAlreadyFavorited = favorites.find(item => item.title === title);
+            if (isAlreadyFavorited) {
+                const heartBtn = document.getElementById('heartBtn');
+                const heartIcon = document.getElementById('heartIcon');
+                
+                heartBtn.classList.add('favorited');
+                heartIcon.classList.remove('bi-heart');
+                heartIcon.classList.add('bi-heart-fill');
+                isFavorited = true;
+            }
+        });
+    </script>
+</body>
+</html> 

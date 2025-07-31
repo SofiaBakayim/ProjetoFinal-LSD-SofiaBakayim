@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help - Chronos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // https://dashboard.emailjs.com/admin
+            emailjs.init("YOUR_USER_ID"); // SUBSTITUIR PELO TEU USER ID
+        })();
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Lato', Arial, sans-serif;
+            background: #630102;
+            color: #FFD97D;
+            line-height: 1.6;
+        }
+        
+        /* Header styles */
+        .header {
+            background: rgba(255,255,255,0.18);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            padding: 18px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 32px rgba(99,1,2,0.18);
+        }
+        
+        .logo-img {
+            height: 40px;
+        }
+        
+        .menu-btn {
+            background: none;
+            border: none;
+            color: #630102;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        
+        .menu-btn:hover {
+            background: rgba(255,217,125,0.2);
+        }
+        
+        /* Sidebar styles */
+        .sidebar {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 260px;
+            height: 100vh;
+            background: rgba(255,255,255,0.18);
+            box-shadow: -4px 0 32px rgba(99,1,2,0.18);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            z-index: 10000;
+            flex-direction: column;
+            align-items: flex-end;
+            padding: 32px 18px 18px 18px;
+            animation: sidebarIn 0.25s;
+            overflow: hidden;
+        }
+        .sidebar.open {
+            display: flex;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            color: #630102;
+            font-size: 2.2rem;
+            position: absolute;
+            left: 18px;
+            top: 18px;
+            cursor: pointer;
+            margin-bottom: 18px;
+            z-index: 1;
+        }
+        .sidebar-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            width: 100%;
+            margin-bottom: 32px;
+        }
+        .sidebar-link {
+            display: block;
+            text-align: center;
+            background: #FFD97D;
+            color: #630102;
+            border-radius: 18px;
+            padding: 10px 0;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(99,1,2,0.13);
+            margin-top: 18px;
+            transition: background 0.2s;
+        }
+        .sidebar-link:hover {
+            background: #E2BF5F;
+        }
+        @keyframes sidebarIn {
+            from { right: -260px; opacity: 0; }
+            to { right: 0; opacity: 1; }
+        }
+        .sidebar-auth {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            margin-top: 18px;
+        }
+        .sidebar-auth-btn {
+            display: block;
+            text-align: center;
+            background: rgba(99,1,2,0.7);
+            color: #fff;
+            border-radius: 18px;
+            padding: 12px 0;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(99,1,2,0.13);
+            transition: background 0.2s;
+        }
+        .sidebar-auth-btn:hover {
+            background: #2d0101;
+        }
+        .sidebar-btns, .sidebar-auth {
+            margin-top: 48px;
+        }
+        
+        /* Main content */
+        .main-content {
+            margin-top: 100px;
+            padding: 0 32px;
+        }
+        
+        /* How it works section */
+        .how-it-works {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .how-it-works h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: #FFD97D;
+        }
+        
+        .how-it-works p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            color: #FFD97D;
+        }
+        
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* FAQs section */
+        .faqs-section {
+            margin-bottom: 80px;
+        }
+        
+        .faqs-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #FFD97D;
+        }
+        
+        .faq-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .faq-category {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 32px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,217,125,0.2);
+        }
+        
+        .faq-category h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #FFD97D;
+            text-align: center;
+        }
+        
+        .faq-item {
+            margin-bottom: 16px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.05);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .faq-question {
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #FFD97D;
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            color: #FFD97D;
+            opacity: 0.9;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 16px 20px;
+            max-height: 200px;
+        }
+        
+        .chevron {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .chevron {
+            transform: rotate(180deg);
+        }
+        
+        /* Contact section */
+        .contact-section {
+            text-align: center;
+            margin-bottom: 80px;
+            padding: 60px 32px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .contact-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #FFD97D;
+        }
+        
+        .contact-section p {
+            font-size: 1.1rem;
+            margin-bottom: 32px;
+            color: #FFD97D;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .contact-btn {
+            background: #FFD97D;
+            color: #630102;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 15px;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255,217,125,0.3);
+        }
+        
+        .contact-btn:hover {
+            background: #E2BF5F;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(255,217,125,0.4);
+        }
+        
+        /* Contact Form Styles */
+        .contact-form {
+            max-width: 500px;
+            margin: 40px auto 0;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 217, 125, 0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #FFD97D;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #FFD97D;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #FFD97D;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #FFD97D;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 0 3px rgba(255, 217, 125, 0.2);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .submit-btn {
+            background: #FFD97D;
+            color: #630102;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 15px;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 8px;
+        }
+        
+        .submit-btn:hover {
+            background: #E2BF5F;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 217, 125, 0.3);
+        }
+        
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .contact-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-family: 'Lato', Arial, sans-serif;
+            font-weight: 600;
+        }
+        
+        .contact-message.success {
+            background: rgba(46, 125, 50, 0.2);
+            color: #4caf50;
+            border: 2px solid #4caf50;
+        }
+        
+        .contact-message.error {
+            background: rgba(244, 67, 54, 0.2);
+            color: #f44336;
+            border: 2px solid #f44336;
+        }
+        
+        /* Footer styles */
+        .novo-footer {
+            background: #630102;
+            color: #FFD97D;
+            padding: 0 0 24px 0;
+            text-align: center;
+            font-family: 'Lato', Arial, sans-serif;
+            margin-top: 64px;
+        }
+        
+        .footer-logo-area {
+            padding-top: 12px;
+        }
+        
+        .footer-logo {
+            max-width: 110px;
+            margin: 0 auto 12px auto;
+            display: block;
+        }
+        
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-nav a {
+            color: #FFD97D;
+            text-decoration: none;
+            font-size: 1rem;
+            font-family: 'Lato', Arial, sans-serif;
+            transition: color 0.2s;
+        }
+        
+        .footer-nav a:hover {
+            color: #fff;
+        }
+        
+        .footer-divider {
+            border: none;
+            border-top: 1px solid #FFD97D;
+            margin: 18px 2% 18px 2%;
+        }
+        
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 96vw;
+            margin: 0 auto;
+            padding: 0 2%;
+        }
+        
+        .footer-copy {
+            color: #FFD97D;
+            font-size: 1rem;
+            text-align: left;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+        
+        .footer-links a {
+            color: #FFD97D;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: #fff;
+        }
+        
+        @media (max-width: 768px) {
+            .faq-categories {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .how-it-works h1,
+            .faqs-section h2 {
+                font-size: 2rem;
+            }
+            
+            .contact-section h2 {
+                font-size: 1.8rem;
+            }
+            
+            .main-content {
+                padding: 0 16px;
+            }
+            
+            .header {
+                padding: 18px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="assets/images/logo-chronos.png" alt="Logo Chronos" class="logo-img">
+        </div>
+        <img src="assets/images/logsoso.png" alt="Abrir menu" class="menu-btn" onclick="openSidebar()">
+    </header>
+
+    <div id="sidebar" class="sidebar">
+        <button class="close-btn" onclick="closeSidebar()">&times;</button>
+        <div class="sidebar-btns">
+            <button class="nav-btn" id="sidebarExplorarBtn" onclick="window.location.href='sobre.html'">Sobre</button>
+            <button class="nav-btn" id="sidebarIdBtn">ID</button>
+            <button class="nav-btn">Perfil</button>
+            <button class="nav-btn" onclick="window.location.href='help.html'">Help</button>
+        </div>
+        <div class="sidebar-auth">
+            <a href="login.html" class="sidebar-auth-btn">Login</a>
+            <a href="registar.html" class="sidebar-auth-btn">Registo</a>
+        </div>
+    </div>
+
+    <!-- Seção How it works -->
+    <section class="how-it-works">
+        <div class="main-content">
+            <h1>How it works</h1>
+            <p>Descobre como a Chronos funciona e como podes começar a usar a nossa plataforma para identificar relíquias e objetos antigos.</p>
+            <div class="video-container">
+                <video controls>
+                    <source src="assets/videos/Composição 1.mp4" type="video/mp4">
+                    O teu browser não suporta vídeos.
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção FAQs -->
+    <section class="faqs-section">
+        <div class="main-content">
+            <h2>Perguntas Frequentes</h2>
+            <div class="faq-categories">
+                <div class="faq-category">
+                    <h3>Como Funciona</h3>
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            Como posso identificar um objeto antigo?
+                            <i class="bi bi-chevron-up chevron"></i>
+                        </div>
+                        <div class="faq-answer">
+                            Basta fazer upload de uma fotografia clara do objeto na nossa plataforma. O nosso sistema de IA analisará a imagem e fornecerá informações detalhadas sobre o objeto.
+                        </div>
+                    </div>
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            Que tipos de objetos posso identificar?
+                            <i class="bi bi-chevron-up chevron"></i>
+                        </div>
+                        <div class="faq-answer">
+                            Identificamos uma vasta gama de objetos antigos, incluindo móveis, joias, cerâmicas, livros, documentos históricos e muito mais.
+                        </div>
+                    </div>
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            Quão precisa é a identificação?
+                            <i class="bi bi-chevron-up chevron"></i>
+                        </div>
+                        <div class="faq-answer">
+                            A nossa tecnologia oferece uma precisão superior a 95% para a maioria dos objetos. Quanto melhor for a qualidade da fotografia, mais precisa será a identificação.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-category">
+                    <h3>Problemas Técnicos</h3>
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            A aplicação não reconhece a minha imagem
+                            <i class="bi bi-chevron-up chevron"></i>
+                        </div>
+                        <div class="faq-answer">
+                            Se a imagem não for reconhecida, pode tentar com uma fotografia mais clara ou contactar a nossa equipa para assistência personalizada.
+                        </div>
+                    </div>
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            Esqueci-me da minha password
+                            <i class="bi bi-chevron-up chevron"></i>
+                        </div>
+                        <div class="faq-answer">
+                            Pode recuperar a sua conta através do email associado ou contactando a nossa equipa de suporte.
+                        </div>
+                    </div>
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            A aplicação está lenta
+                            <i class="bi bi-chevron-up chevron"></i>
+                        </div>
+                        <div class="faq-answer">
+                            Tente atualizar a página ou limpar o cache do browser. Se o problema persistir, contacte-nos.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-category">
+                    <h3>Privacidade e Segurança</h3>
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            Os meus dados estão seguros?
+                            <i class="bi bi-chevron-up chevron"></i>
+                        </div>
+                        <div class="faq-answer">
+                            As imagens são processadas para identificação mas não são guardadas permanentemente. Apenas guardamos metadados anónimos para melhorar o serviço.
+                        </div>
+                    </div>
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            A app partilha os meus dados com terceiros?
+                            <i class="bi bi-chevron-up chevron"></i>
+                        </div>
+                        <div class="faq-answer">
+                            Não partilhamos os seus dados pessoais com terceiros. Todos os dados são tratados de acordo com a nossa política de privacidade.
+                        </div>
+                    </div>
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <div class="faq-question">
+                            Como são protegidos os meus dados?
+                            <i class="bi bi-chevron-up chevron"></i>
+                        </div>
+                        <div class="faq-answer">
+                            Utilizamos encriptação de ponta a ponta e seguimos as melhores práticas de segurança para proteger todos os seus dados.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Contact -->
+    <section class="contact-section">
+        <h2>Ainda tens alguma questão?</h2>
+        <p>Questiona aqui as tuas dúvidas seremos o mais rápido possível na tua resposta.</p>
+        <button class="contact-btn" onclick="showContactForm()">Contactar</button>
+        
+        <div id="contactForm" class="contact-form" style="display: none;">
+            <form id="contactFormElement" onsubmit="submitContactForm(event)">
+                <div class="form-group">
+                    <label for="name">Name*</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email*</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensagem*</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn" id="submitBtn">Contacta-nos</button>
+            </form>
+            <div id="contactMessage" class="contact-message" style="display: none;"></div>
+        </div>
+    </section>
+
+    <footer class="novo-footer">
+        <div class="footer-logo-area">
+            <img src="assets/images/zllz.png" alt="Logo Chronos" class="footer-logo">
+        </div>
+        <nav class="footer-nav">
+            <a href="sobre.html">Explorar</a>
+            <a href="home.html#upload-section">Identificar Relíquias</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="#">Perfil</a>
+            <a href="help.html">Help</a>
+        </nav>
+        <hr class="footer-divider">
+        <div class="footer-bottom">
+            <span class="footer-copy">© 2024 CHRONOS. All rights reserved.</span>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Cookies Settings</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFAQ(element) {
+            // Toggle active class for clicked item
+            element.classList.toggle('active');
+        }
+        
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+        }
+        
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+        }
+        
+        function showContactForm() {
+            const form = document.getElementById('contactForm');
+            if (form.style.display === 'none') {
+                form.style.display = 'block';
+                form.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                form.style.display = 'none';
+            }
+        }
+        
+        function submitContactForm(event) {
+            event.preventDefault();
+            
+            const form = document.getElementById('contactFormElement');
+            const submitBtn = document.getElementById('submitBtn');
+            const messageDiv = document.getElementById('contactMessage');
+            
+            // Desabilitar botão durante envio
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'A enviar...';
+            
+            // Esconder mensagem anterior
+            messageDiv.style.display = 'none';
+            
+            // Obter dados do formulário
+            const formData = new FormData(form);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const message = formData.get('message');
+            
+            // Validação básica
+            if (!name || !email || !message) {
+                messageDiv.textContent = 'Todos os campos são obrigatórios';
+                messageDiv.className = 'contact-message error';
+                messageDiv.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Contacta-nos';
+                return;
+            }
+            
+            // Enviar email usando EmailJS
+            const templateParams = {
+                to_name: 'Sofia',
+                from_name: name,
+                from_email: email,
+                message: message,
+                to_email: 'Sofia.bakayim@gmail.com'
+            };
+            
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function(response) {
+                    messageDiv.textContent = 'Mensagem enviada com sucesso! Entraremos em contacto em breve.';
+                    messageDiv.className = 'contact-message success';
+                    messageDiv.style.display = 'block';
+                    form.reset();
+                }, function(error) {
+                    messageDiv.textContent = 'Erro ao enviar mensagem. Tente novamente.';
+                    messageDiv.className = 'contact-message error';
+                    messageDiv.style.display = 'block';
+                })
+                .finally(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Contacta-nos';
+                });
+        }
+        
+        // Close sidebar when clicking outside
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuBtn = document.querySelector('.menu-btn');
+            
+            if (!sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
+                sidebar.classList.remove('open');
+            }
+        });
+    </script>
+    <script src="js/scripts.js"></script>
+    <script>
+        // Garantir que as funções da sidebar funcionem
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar se as funções existem
+            if (typeof openSidebar === 'undefined') {
+                window.openSidebar = function() {
+                    document.getElementById('sidebar').classList.add('open');
+                };
+            }
+            if (typeof closeSidebar === 'undefined') {
+                window.closeSidebar = function() {
+                    document.getElementById('sidebar').classList.remove('open');
+                };
+            }
+        });
+    </script>
+</body>
+</html> 

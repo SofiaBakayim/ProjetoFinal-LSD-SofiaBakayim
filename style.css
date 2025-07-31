@@ -1,0 +1,147 @@
+.logo-img {
+    max-width: 320px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+:root {
+    --vinho: #630102;
+    --dourado: #FFD97D;
+    --bronze: #855A25;
+    --preto: #0F0F0F;
+    --creme: #FAF3E3;
+    --cinza: #4D4D4D;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Lato', Arial, sans-serif;
+    background: var(--dourado);
+    color: var(--preto);
+    position: relative;
+}
+
+.header {
+    background: var(--vinho);
+    padding: 40px 0 20px 0;
+    text-align: center;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);
+}
+
+.logo-text {
+    font-family: 'Lighthaus', serif; /* Substitui se não tiveres a fonte */
+    color: var(--dourado);
+    font-size: 3rem;
+    letter-spacing: 0.1em;
+    display: block;
+}
+
+.logo-sub {
+    font-family: 'La Belle Aurore', cursive;
+    color: var(--dourado);
+    font-size: 1.2rem;
+    display: block;
+    margin-top: -10px;
+    letter-spacing: 0.2em;
+}
+
+.main-content {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Isto centra verticalmente */
+    margin-top: 0; /* Remove o margin-top extra */
+    position: relative;
+    padding-bottom: 60px; /* espaço para a usp-footnote */
+}
+
+.main-title {
+    font-family: 'Lighthaus', serif;
+    color: var(--vinho);
+    font-size: 2.0rem;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.usp-desc {
+    font-family: 'Lato', Arial, sans-serif;
+    color: var(--vinho);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    text-align: center;
+}
+
+.button-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+@media (max-width: 600px) {
+    .button-group {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+.btn {
+    font-family: 'Lato', Arial, sans-serif;
+    background: var(--vinho);
+    color: var(--creme);
+    border: none;
+    border-radius: 60px;
+    padding: 18px 48px;
+    font-size: 1.0rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 25px rgba(99,1,2,0.3), 0 4px 10px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:hover {
+    background: var(--bronze);
+    color: var(--creme);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(99,1,2,0.4), 0 6px 15px rgba(0,0,0,0.3);
+}
+
+.btn-secondary {
+    background: var(--vinho);
+    color: var(--creme);
+}
+
+.btn-secondary:hover {
+    background: var(--bronze);
+    color: var(--creme);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(99,1,2,0.4), 0 6px 15px rgba(0,0,0,0.3);
+}
+
+
+.usp-footnote {
+    margin: 0 0 30px 0;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    left: 0;
+    bottom: 0;
+    background: transparent;
+    z-index: 100;
+    font-size: 1rem;
+    color: var(--vinho);
+    pointer-events: none;
+} 

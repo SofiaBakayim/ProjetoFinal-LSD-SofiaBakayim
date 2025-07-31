@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Página não encontrada - Chronos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="assets/images/logooos.png">
+    <link rel="shortcut icon" type="image/png" href="assets/images/logooos.png">
+    <link rel="apple-touch-icon" href="assets/images/logooos.png">
+    <link href="https://fonts.googleapis.com/css2?family=La+Belle+Aurore&family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @font-face {
+            font-family: 'Lighthaus';
+            src: url('assets/fonts/Lighthaus.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            background: #630102;
+            color: #FFD97D;
+            font-family: 'Lato', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background: #630102;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 32px;
+            position: relative;
+            z-index: 10;
+            min-height: 80px;
+        }
+        .logo-img {
+            height: 48px;
+            max-width: 180px;
+            min-width: 120px;
+            margin: 0 auto;
+            display: block;
+            position: relative;
+            z-index: 2;
+        }
+        .nav-btns {
+            display: flex;
+            gap: 18px;
+        }
+        .left-nav {
+            flex: 1;
+            justify-content: flex-start;
+        }
+        .right-nav {
+            flex: 1;
+            justify-content: flex-end;
+        }
+        .nav-btn {
+            background: rgba(255,255,255,0.03);
+            color: #630102;
+            border: none;
+            border-radius: 18px;
+            padding: 8px 20px;
+            min-width: 70px;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s, opacity 0.2s;
+            box-shadow: 0 8px 48px 0 rgba(99,1,2,0.10), 0 2px 8px 0 rgba(255,255,255,0.18);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            margin: 0;
+            outline: none;
+            opacity: 0.7;
+        }
+        .nav-btn:hover {
+            background: #E2BF5F;
+            color: #630102;
+            transform: scale(1.04);
+        }
+        .header-logo-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-img {
+            max-width: 320px;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        @media (max-width: 900px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+                padding: 24px 0 0 0;
+            }
+            .header-btns {
+                justify-content: center;
+            }
+        }
+        /* Conteúdo central */
+        .erro-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 32px 16px 0 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 60vh;
+        }
+        .erro-titulo {
+            font-family: 'Lighthaus', 'Playfair Display', serif;
+            color: #FFD97D;
+            font-size: 2.6rem;
+            text-align: center;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            margin-bottom: 0.5em;
+            margin-top: 1.5em;
+        }
+        .erro-404 {
+            font-family: 'Playfair Display', serif;
+            color: #FFD97D;
+            font-size: 2rem;
+            text-align: center;
+            font-weight: 400;
+            margin-bottom: 1.2em;
+        }
+        .erro-desc {
+            color: #FFD97D;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 2.2em;
+            letter-spacing: 0.08em;
+            line-height: 1.5;
+        }
+        .erro-botoes {
+            display: flex;
+            gap: 18px;
+            justify-content: center;
+            margin-bottom: 2.5em;
+            flex-wrap: wrap;
+        }
+        .erro-btn {
+            background: #fff;
+            color: #630102;
+            border: none;
+            border-radius: 28px;
+            padding: 14px 38px;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            margin: 0 8px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, border 0.2s, transform 0.2s;
+            box-shadow: 0 4px 16px rgba(99,1,2,0.10);
+            outline: none;
+        }
+        .erro-btn:hover {
+            background: #FFD97D;
+            color: #630102;
+            border: 1.5px solid #FFD97D;
+            transform: scale(1.04);
+        }
+        .erro-btn-sec {
+            background: transparent;
+            color: #FFD97D;
+            border: 1.5px solid #FFD97D;
+        }
+        .erro-btn-sec:hover {
+            background: #FFD97D;
+            color: #630102;
+        }
+        .erro-footer {
+            color: #FFD97D;
+            font-size: 1.1rem;
+            text-align: center;
+            margin-top: 2.5em;
+            letter-spacing: 0.08em;
+        }
+        /* FOOTER */
+        .novo-footer {
+            background: #630102;
+            color: #FFD97D;
+            padding: 0 0 24px 0;
+            text-align: center;
+            font-family: 'Lato', Arial, sans-serif;
+            margin-top: 64px;
+        }
+        .footer-logo-area {
+            padding-top: 12px;
+        }
+        .footer-logo {
+            max-width: 110px;
+            margin: 0 auto 12px auto;
+            display: block;
+        }
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .footer-nav a {
+            color: #FFD97D;
+            text-decoration: none;
+            font-size: 1rem;
+            font-family: 'Lato', Arial, sans-serif;
+            transition: color 0.2s;
+        }
+        .footer-nav a:hover {
+            color: #fff;
+        }
+        .footer-divider {
+            border: none;
+            border-top: 1px solid #FFD97D;
+            margin: 18px 2% 18px 2%;
+        }
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 96vw;
+            margin: 0 auto;
+            padding: 0 2%;
+        }
+        .footer-copy {
+            color: #FFD97D;
+            font-size: 1rem;
+            text-align: left;
+        }
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+        .footer-links a {
+            color: #FFD97D;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover {
+            color: #fff;
+        }
+        @media (max-width: 700px) {
+            .footer-nav {
+                gap: 14px;
+                font-size: 0.95rem;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 8px;
+                align-items: flex-start;
+            }
+            .footer-logo {
+                max-width: 80px;
+            }
+        }
+        @media (max-width: 900px) {
+            .nav-btns {
+                display: none !important;
+            }
+            .menu-btn {
+                display: block !important;
+                position: absolute;
+                right: 32px;
+                top: 50%;
+                transform: translateY(-50%);
+                height: 38px;
+                cursor: pointer;
+                z-index: 10001;
+            }
+        }
+        .menu-btn {
+            display: none;
+        }
+        .sidebar {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 260px;
+            height: 100vh;
+            background: rgba(255,255,255,0.18);
+            box-shadow: -4px 0 32px rgba(99,1,2,0.18);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            z-index: 10000;
+            flex-direction: column;
+            align-items: flex-end;
+            padding: 32px 18px 18px 18px;
+            animation: sidebarIn 0.25s;
+            overflow: hidden;
+        }
+        .sidebar.open {
+            display: flex;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            color: #630102;
+            font-size: 2.2rem;
+            position: absolute;
+            left: 18px;
+            top: 18px;
+            cursor: pointer;
+            margin-bottom: 18px;
+            z-index: 1;
+        }
+        .sidebar-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            width: 100%;
+            margin-bottom: 32px;
+        }
+        .sidebar-link, .nav-btn {
+            display: block;
+            text-align: center;
+            background: #FFD97D;
+            color: #630102;
+            border-radius: 18px;
+            padding: 10px 0;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(99,1,2,0.13);
+            margin-top: 18px;
+            transition: background 0.2s;
+            border: none;
+        }
+        .sidebar-link:hover, .nav-btn:hover {
+            background: #E2BF5F;
+        }
+        @keyframes sidebarIn {
+            from { right: -260px; opacity: 0; }
+            to { right: 0; opacity: 1; }
+        }
+        .sidebar-auth {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            margin-top: 18px;
+        }
+        .sidebar-auth-btn {
+            display: block;
+            text-align: center;
+            background: rgba(99,1,2,0.7);
+            color: #fff;
+            border-radius: 18px;
+            padding: 12px 0;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(99,1,2,0.13);
+            transition: background 0.2s;
+        }
+        .sidebar-auth-btn:hover {
+            background: #2d0101;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-btns left-nav">
+            <button class="nav-btn" onclick="window.location.href='sobre.html'">Sobre</button>
+            <button class="nav-btn" id="idBtn">ID</button>
+        </div>
+        <img src="assets/images/logo-chronos.png" alt="Logo Chronos" class="logo-img">
+        <div class="nav-btns right-nav">
+            <button class="nav-btn" onclick="window.location.href='perfil.html'">Perfil</button>
+            <button class="nav-btn">Help</button>
+        </div>
+        <img src="assets/images/logsoso.png" alt="Abrir menu" class="menu-btn" onclick="openSidebar()">
+    </header>
+    <div id="sidebar" class="sidebar">
+        <button class="close-btn" onclick="closeSidebar()">&times;</button>
+        <div class="sidebar-btns">
+            <button class="nav-btn" id="sidebarExplorarBtn">Explorar</button>
+            <button class="nav-btn" id="sidebarIdBtn">ID</button>
+            <button class="nav-btn" onclick="window.location.href='perfil.html'">Perfil</button>
+            <button class="nav-btn">Help</button>
+        </div>
+        <div class="sidebar-auth">
+            <a href="login.html" class="sidebar-auth-btn">Login</a>
+            <a href="registar.html" class="sidebar-auth-btn">Registo</a>
+        </div>
+    </div>
+    <main>
+        <div class="erro-container">
+            <div class="erro-titulo">
+                ESTA PÁGINA FICOU<br>
+                ESQUECIDA NOS<br>
+                ARQUIVOS DO PASSADO
+            </div>
+            <div class="erro-404">“404”</div>
+            <div class="erro-desc">
+                Pode ter sido movida, eliminada ou talvez nunca tenha existido.<br>
+                Mas não te preocupes, ainda há muito para descobrir na Chronos.
+            </div>
+            <div class="erro-botoes">
+                <button class="erro-btn" onclick="window.location.href='home.html'">Voltar à página inicial</button>
+                <button class="erro-btn erro-btn-sec" onclick="window.location.href='home.html'">Explorar novas descobertas</button>
+            </div>
+            <div class="erro-footer">
+                Se continuares com dificuldades, contacta-nos.<br>
+                Chronos — o tempo revela tudo.
+            </div>
+        </div>
+    </main>
+    <footer class="novo-footer">
+        <div class="footer-logo-area">
+            <img src="assets/images/zllz.png" alt="Logo Chronos" class="footer-logo">
+        </div>
+        <nav class="footer-nav">
+            <a href="#">Explorar</a>
+            <a href="#">Identificar Relíquia</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="perfil.html">Perfil</a>
+            <a href="#">Help</a>
+        </nav>
+        <hr class="footer-divider">
+        <div class="footer-bottom">
+            <span class="footer-copy">© 2024 Relume. All rights reserved.</span>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Cookies Settings</a>
+            </div>
+        </div>
+    </footer>
+    <script src="js/scripts.js"></script>
+</body>
+</html> 

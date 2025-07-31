@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuração da Base de Dados - Chronos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .btn {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            transition: transform 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        .steps {
+            text-align: left;
+            margin: 20px 0;
+        }
+        .steps ol {
+            padding-left: 20px;
+        }
+        .steps li {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Configuração da Base de Dados Chronos</h1>
+        
+        <div class="info">
+            <h3>📋 O que vai ser configurado:</h3>
+            <ul>
+                <li>✅ Base de dados "chronos"</li>
+                <li>✅ Tabela "users" (utilizadores)</li>
+                <li>✅ Tabela "profiles" (perfis)</li>
+                <li>✅ Tabela "favorites" (favoritos)</li>
+                <li>✅ Tabela "identifications" (identificações)</li>
+                <li>✅ Utilizador de teste: teste@chronos.com / 123456</li>
+            </ul>
+        </div>
+
+        <div class="steps">
+            <h3>🚀 Como proceder:</h3>
+            <ol>
+                <li>Clique no botão "Configurar Base de Dados" abaixo</li>
+                <li>Aguarde a configuração ser concluída</li>
+                <li>Vá ao phpMyAdmin para verificar as tabelas criadas</li>
+                <li>Teste o login com as credenciais fornecidas</li>
+            </ol>
+        </div>
+
+        <a href="config_db.php" class="btn">🚀 Configurar Base de Dados</a>
+        
+        <div class="info">
+            <h3>💡 Após a configuração:</h3>
+            <p>Pode aceder ao phpMyAdmin em: <a href="http://localhost/phpmyadmin" target="_blank">http://localhost/phpmyadmin</a></p>
+            <p>E testar o login em: <a href="login.php">login.php</a></p>
+        </div>
+    </div>
+</body>
+</html> 

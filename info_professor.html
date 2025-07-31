@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informações do Sistema Chronos - Professor</title>
+    <style>
+        body {
+            font-family: 'Lato', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        h2 {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        .section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .btn {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .code {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Sistema Chronos - Informações para o Professor</h1>
+        
+        <div class="section">
+            <h2>📋 Resumo do Projeto</h2>
+            <p><strong>Nome:</strong> Chronos - Sistema de Identificação de Objetos Antigos</p>
+            <p><strong>Aluno:</strong> [Seu Nome]</p>
+            <p><strong>Data:</strong> Julho 2024</p>
+            <p><strong>Tecnologias:</strong> PHP, MySQL, HTML, CSS, JavaScript</p>
+        </div>
+
+        <div class="section">
+            <h2>🗄️ Estrutura da Base de Dados</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>📊 Tabela: users</h3>
+                    <ul>
+                        <li><strong>id:</strong> INT AUTO_INCREMENT PRIMARY KEY</li>
+                        <li><strong>name:</strong> VARCHAR(255) NOT NULL</li>
+                        <li><strong>email:</strong> VARCHAR(255) UNIQUE NOT NULL</li>
+                        <li><strong>password:</strong> VARCHAR(255) NOT NULL</li>
+                        <li><strong>created_at:</strong> TIMESTAMP DEFAULT CURRENT_TIMESTAMP</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>👤 Tabela: profiles</h3>
+                    <ul>
+                        <li><strong>id:</strong> INT AUTO_INCREMENT PRIMARY KEY</li>
+                        <li><strong>user_id:</strong> INT NOT NULL (FOREIGN KEY)</li>
+                        <li><strong>name:</strong> VARCHAR(255) NOT NULL</li>
+                        <li><strong>bio:</strong> TEXT</li>
+                        <li><strong>location:</strong> VARCHAR(255)</li>
+                        <li><strong>specialty:</strong> VARCHAR(100)</li>
+                        <li><strong>experience:</strong> VARCHAR(50)</li>
+                        <li><strong>notifications:</strong> JSON</li>
+                        <li><strong>updated_at:</strong> TIMESTAMP</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>⭐ Tabela: favorites</h3>
+                    <ul>
+                        <li><strong>id:</strong> INT AUTO_INCREMENT PRIMARY KEY</li>
+                        <li><strong>user_id:</strong> INT NOT NULL (FOREIGN KEY)</li>
+                        <li><strong>title:</strong> VARCHAR(255) NOT NULL</li>
+                        <li><strong>image:</strong> VARCHAR(500)</li>
+                        <li><strong>category:</strong> VARCHAR(100)</li>
+                        <li><strong>created_at:</strong> TIMESTAMP DEFAULT CURRENT_TIMESTAMP</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>🔍 Tabela: identifications</h3>
+                    <ul>
+                        <li><strong>id:</strong> INT AUTO_INCREMENT PRIMARY KEY</li>
+                        <li><strong>user_id:</strong> INT NOT NULL (FOREIGN KEY)</li>
+                        <li><strong>title:</strong> VARCHAR(255) NOT NULL</li>
+                        <li><strong>category:</strong> VARCHAR(100)</li>
+                        <li><strong>material:</strong> VARCHAR(255)</li>
+                        <li><strong>origin:</strong> VARCHAR(255)</li>
+                        <li><strong>created_at:</strong> TIMESTAMP DEFAULT CURRENT_TIMESTAMP</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔐 Credenciais de Teste</h2>
+            <div class="info">
+                <p><strong>Email:</strong> teste@chronos.com</p>
+                <p><strong>Password:</strong> 123456</p>
+                <p><strong>Perfil:</strong> Sara Correia - Apaixonado por cerâmica ibérica</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📁 Estrutura de Ficheiros</h2>
+            <div class="code">
+                Projeto Final/
+├── assets/
+│   ├── fonts/
+│   ├── images/
+│   └── videos/
+├── js/
+├── config.php (Configuração da base de dados)
+├── login.php (Sistema de autenticação)
+├── registar.php (Registo de utilizadores)
+├── perfil.php (Gestão de perfis)
+├── favorites.php (API de favoritos)
+├── identifications.php (API de identificações)
+├── setup_db.php (Configuração da base de dados)
+├── README.md (Documentação)
+└── [outros ficheiros HTML/CSS]
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🚀 Funcionalidades Implementadas</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>✅ Autenticação</h3>
+                    <ul>
+                        <li>Registo de utilizadores</li>
+                        <li>Login/Logout</li>
+                        <li>Gestão de sessões</li>
+                        <li>Encriptação de passwords</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>✅ Perfis de Utilizador</h3>
+                    <ul>
+                        <li>Edição de perfil</li>
+                        <li>Upload de imagem</li>
+                        <li>Configuração de notificações</li>
+                        <li>Especialidade e experiência</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>✅ Sistema de Favoritos</h3>
+                    <ul>
+                        <li>Adicionar/remover favoritos</li>
+                        <li>Listagem de favoritos</li>
+                        <li>API REST para gestão</li>
+                        <li>Persistência em base de dados</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>✅ Identificações</h3>
+                    <ul>
+                        <li>Registo de identificações</li>
+                        <li>Categorização de objetos</li>
+                        <li>Histórico de identificações</li>
+                        <li>API para gestão</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔧 Configuração Técnica</h2>
+            <div class="info">
+                <p><strong>Servidor:</strong> XAMPP (Apache + MySQL)</p>
+                <p><strong>Base de Dados:</strong> MySQL (chronos)</p>
+                <p><strong>PHP:</strong> PDO para conexões seguras</p>
+                <p><strong>Frontend:</strong> HTML5, CSS3, JavaScript</p>
+                <p><strong>Design:</strong> Responsivo com Bootstrap Icons</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Estatísticas do Sistema</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>🗄️ Base de Dados</h3>
+                    <ul>
+                        <li><strong>4 tabelas</strong> criadas</li>
+                        <li><strong>Relacionamentos</strong> com FOREIGN KEYS</li>
+                        <li><strong>Índices</strong> otimizados</li>
+                        <li><strong>Integridade</strong> referencial</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>👥 Utilizadores</h3>
+                    <ul>
+                        <li><strong>1 utilizador</strong> de teste criado</li>
+                        <li><strong>Sistema</strong> de autenticação funcional</li>
+                        <li><strong>Perfis</strong> personalizáveis</li>
+                        <li><strong>Sessões</strong> seguras</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>🔧 APIs</h3>
+                    <ul>
+                        <li><strong>2 endpoints</strong> REST</li>
+                        <li><strong>JSON</strong> como formato de dados</li>
+                        <li><strong>CRUD</strong> completo</li>
+                        <li><strong>Validação</strong> de dados</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>📱 Interface</h3>
+                    <ul>
+                        <li><strong>Design</strong> responsivo</li>
+                        <li><strong>UX</strong> otimizada</li>
+                        <li><strong>Acessibilidade</strong> implementada</li>
+                        <li><strong>Performance</strong> otimizada</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔗 Links Importantes</h2>
+            <div style="text-align: center;">
+                <a href="http://localhost/phpmyadmin" target="_blank" class="btn">📊 phpMyAdmin</a>
+                <a href="login.php" class="btn">🔐 Testar Login</a>
+                <a href="perfil.php" class="btn">👤 Ver Perfil</a>
+                <a href="setup_db.php" class="btn">🔧 Configurar BD</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📝 Notas para o Professor</h2>
+            <div class="warning">
+                <p><strong>⚠️ Nota:</strong> O sistema está configurado para funcionar com XAMPP. Certifique-se de que o Apache e MySQL estão a funcionar.</p>
+                <p><strong>🔧 Instalação:</strong> Execute o arquivo setup_db.php para configurar a base de dados automaticamente.</p>
+                <p><strong>👤 Teste:</strong> Use as credenciais de teste fornecidas para testar o sistema.</p>
+                <p><strong>📊 Verificação:</strong> Aceda ao phpMyAdmin para verificar a estrutura da base de dados.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎯 Objetivos Alcançados</h2>
+            <div class="success">
+                <ul>
+                    <li>✅ Sistema de autenticação completo</li>
+                    <li>✅ Gestão de perfis de utilizador</li>
+                    <li>✅ Sistema de favoritos funcional</li>
+                    <li>✅ API REST para gestão de dados</li>
+                    <li>✅ Base de dados MySQL estruturada</li>
+                    <li>✅ Interface responsiva e moderna</li>
+                    <li>✅ Documentação completa</li>
+                    <li>✅ Código limpo e bem estruturado</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

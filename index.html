@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Chronos - Mensurável</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="assets/images/logooos.png">
+    <link rel="shortcut icon" type="image/png" href="assets/images/logooos.png">
+    <link rel="apple-touch-icon" href="assets/images/logooos.png">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=La+Belle+Aurore&family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Efeito portas */
+        .split-mask {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: 9999;
+            pointer-events: none;
+            display: flex;
+        }
+        .split-left, .split-right {
+            flex: 1;
+            background: #000;
+            transition: transform 0.8s cubic-bezier(0.77,0,0.18,1);
+        }
+        .split-left {
+            border-right: 2px solid #630102;
+            transform: translateX(0);
+        }
+        .split-right {
+            border-left: 2px solid #630102;
+            transform: translateX(0);
+        }
+        .split-mask.open .split-left {
+            transform: translateX(-100%);
+        }
+        .split-mask.open .split-right {
+            transform: translateX(100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="split-mask" id="splitMask">
+        <div class="split-left"></div>
+        <div class="split-right"></div>
+    </div>
+    <header class="header">
+        <div class="logo">
+            <img src="assets/images/logo-chronos.png" alt="Logo Chronos" class="logo-img">
+        </div>
+    </header>
+    <main class="main-content">
+        <h1 class="main-title">Bem vindo se fores um CHRONOS<br>se não regista-te e torna-te num</h1>
+        <p class="usp-desc">
+            Descobre a tua nova forma de medir o tempo, produtividade e evolução pessoal.<br>
+            Junta-te à comunidade Chronos e faz parte da mudança!
+        </p>
+        <div class="button-group">
+            <button class="btn" onclick="goTo('register')">Registar</button>
+            <button class="btn btn-secondary" onclick="goTo('login')">Log In</button>
+        </div>
+    </main>
+    <footer class="novo-footer">
+        <div class="footer-logo-area">
+            <img src="assets/images/zllz.png" alt="Logo Chronos" class="footer-logo">
+        </div>
+        <nav class="footer-nav">
+            <a href="sobre.html">Sobre</a>
+            <a href="home.html#upload-section">Identificar Relíquia</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="#">Perfil</a>
+            <a href="#">Help</a>
+        </nav>
+        <hr class="footer-divider">
+        <div class="footer-bottom">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Cookies Settings</a>
+            </div>
+        </div>
+    </footer>
+    <style>
+    .novo-footer {
+        background: #630102;
+        color: #FFD97D;
+        padding: 0 0 24px 0;
+        text-align: center;
+        font-family: 'Lato', Arial, sans-serif;
+        margin-top: 64px;
+    }
+    .footer-logo-area {
+        padding-top: 12px;
+    }
+    .footer-logo {
+        max-width: 110px;
+        margin: 0 auto 12px auto;
+        display: block;
+    }
+    .footer-nav {
+        display: flex;
+        justify-content: center;
+        gap: 32px;
+        margin-bottom: 12px;
+        flex-wrap: wrap;
+    }
+    .footer-nav a {
+        color: #FFD97D;
+        text-decoration: none;
+        font-size: 1rem;
+        font-family: 'Lato', Arial, sans-serif;
+        transition: color 0.2s;
+    }
+    .footer-nav a:hover {
+        color: #fff;
+    }
+    .footer-divider {
+        border: none;
+        border-top: 1px solid #FFD97D;
+        margin: 18px 2% 18px 2%;
+    }
+    .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        max-width: 96vw;
+        margin: 0 auto;
+        padding: 0 2%;
+    }
+    .footer-copy {
+        color: #FFD97D;
+        font-size: 1rem;
+        text-align: left;
+    }
+    .footer-links {
+        display: flex;
+        gap: 24px;
+    }
+    .footer-links a {
+        color: #FFD97D;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: color 0.2s;
+    }
+    .footer-links a:hover {
+        color: #fff;
+    }
+    @media (max-width: 700px) {
+        .footer-nav {
+            gap: 14px;
+            font-size: 0.95rem;
+        }
+        .footer-bottom {
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-start;
+        }
+        .footer-logo {
+            max-width: 80px;
+        }
+    }
+    </style>
+
+    <script src="js/scripts.js"></script>
+    <script>
+        // Efeito portas a abrir SEMPRE que se entra no index.html
+        window.addEventListener('DOMContentLoaded', () => {
+            const splitMask = document.getElementById('splitMask');
+            setTimeout(() => {
+                splitMask.classList.add('open');
+                setTimeout(() => {
+                    splitMask.style.display = 'none';
+                }, 900); // tempo da animação + margem
+            }, 300); // delay inicial
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensagens de Contacto - Chronos</title>
+    <style>
+        body {
+            font-family: 'Lato', Arial, sans-serif;
+            background: #630102;
+            color: #FFD97D;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            text-align: center;
+            color: #FFD97D;
+            margin-bottom: 30px;
+        }
+        .message {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #FFD97D;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            color: #FFD97D;
+        }
+        .no-messages {
+            text-align: center;
+            font-style: italic;
+            color: #FFD97D;
+        }
+        .clear-btn {
+            background: #FFD97D;
+            color: #630102;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .clear-btn:hover {
+            background: #E2BF5F;
+        }
+        .back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: #FFD97D;
+            border: 1px solid #FFD97D;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📧 Mensagens de Contacto</h1>
+        
+        <button class="clear-btn" onclick="clearMessages()">Limpar Todas as Mensagens</button>
+        
+        <div id="messagesContainer">
+            <!-- As mensagens serão carregadas aqui -->
+        </div>
+        
+        <a href="help.html" class="back-btn">← Voltar ao Help</a>
+    </div>
+
+    <script>
+        function loadMessages() {
+            const messagesContainer = document.getElementById('messagesContainer');
+            const messages = localStorage.getItem('contactMessages');
+            
+            if (!messages || messages.trim() === '') {
+                messagesContainer.innerHTML = '<div class="no-messages">Nenhuma mensagem encontrada.</div>';
+                return;
+            }
+            
+            const messageDivs = messages.split('=====================================').map(msg => {
+                if (msg.trim()) {
+                    return `<div class="message">${msg.trim()}</div>`;
+                }
+                return '';
+            }).filter(msg => msg !== '');
+            
+            messagesContainer.innerHTML = messageDivs.join('');
+        }
+        
+        function clearMessages() {
+            if (confirm('Tens a certeza que queres limpar todas as mensagens?')) {
+                localStorage.removeItem('contactMessages');
+                loadMessages();
+            }
+        }
+        
+        // Carregar mensagens quando a página carrega
+        document.addEventListener('DOMContentLoaded', loadMessages);
+    </script>
+</body>
+</html> 
